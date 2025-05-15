@@ -1,0 +1,128 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="{% static 'css/admin.css' %}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+</head>
+<body>
+  <div class="main-container">
+
+    {% if not user.is_authenticated %}
+    <!-- Login Section -->
+    <div class="login-container">
+      <div class="logo-area">
+        <img src="{% static 'assets/Lora.png' %}" alt="Company Logo" class="logo-img" />
+      </div>
+      <div class="login-form-area">
+        <h2>Admin Login</h2>
+        <form method="POST">
+          {% csrf_token %}
+          <input type="text" name="username" placeholder="Username" required />
+          <input type="password" name="password" placeholder="Password" required />
+          <button type="submit">Login</button>
+        </form>
+        {% if messages %}
+          {% for message in messages %}
+            <p style="color: red;">{{ message }}</p>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+
+    {% else %}
+    <!-- Dashboard Section -->
+    <div class="dashboard">
+      <div class="dashboard-header">
+        <div class="ref-id">Logged in as: {{ user.username }}</div>
+        <div class="user-profile">
+          <i class="fas fa-user-circle"></i> Admin
+          <a href="{% url 'admin_logout' %}" class="logout-btn">Logout</a>
+        </div>
+      </div><br>
+
+      <!-- Search Bar -->
+      <form method="GET" class="search-form">
+        <input type="text" name="search" placeholder="Search anything..." value="{{ request.GET.search }}">
+        <button type="submit">Search</button>
+      </form>
+
+      <!-- Submission Count -->
+      <div class="submission-count">
+        Total Submissions: {{ applicants|length }}
+      </div>
+
+      <!-- Table -->
+      <div class="table-section">
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>S.No</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>SSC</th>
+                <th>Inter</th>
+                <th>Degree</th>
+                <th>Aadhar</th>
+                <th>PAN</th>
+                <th>Photo</th>
+                <th>Pre-Offer</th>
+                <th>Pay Slips</th>
+                <th>Experience</th>
+                <th>Submitted At</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+  {% for applicant in applicants %}
+  <tr>
+    <td>{{ forloop.counter }}</td>
+    <td>{{ applicant.full_name }}</td>
+    <td>{{ applicant.email }}</td>
+    <td>{{ applicant.mobile_number }}</td>
+    <td>{{ applicant.address }}</td>
+    <td><a href="{{ applicant.ssc_memo.url }}" target="_blank">View</a></td>
+    <td><a href="{{ applicant.inter_memo.url }}" target="_blank">View</a></td>
+    <td><a href="{{ applicant.degree_memo.url }}" target="_blank">View</a></td>
+    <td><a href="{{ applicant.aadhar_card.url }}" target="_blank">View</a></td>
+    <td><a href="{{ applicant.pan_card.url }}" target="_blank">View</a></td>
+    <td><a href="{{ applicant.passport_photo.url }}" target="_blank">View</a></td>
+    <td>
+      {% if applicant.pre_offer_letter %}
+        <a href="{{ applicant.pre_offer_letter.url }}" target="_blank">View</a>
+      {% endif %}
+    </td>
+    <td>
+      {% if applicant.pay_slips %}
+        <a href="{{ applicant.pay_slips.url }}" target="_blank">View</a>
+      {% endif %}
+    </td>
+    <td>
+      {% if applicant.relieving_experience %}
+        <a href="{{ applicant.relieving_experience.url }}" target="_blank">View</a>
+      {% endif %}
+    </td>
+    <td>{{ applicant.submitted_at|date:"Y-m-d H:i" }}</td>
+    <td>
+      <a href="{% url 'delete_applicant' applicant.id %}" onclick="return confirm('Are you sure?')">
+        <i class="fas fa-trash" style="color: red;"></i>
+      </a>
+    </td>
+  </tr>
+  {% endfor %}
+</tbody>
+
+          </table>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+  <script src="{% static 'js/admin.js' %}"></script>
+</body>
+</html>

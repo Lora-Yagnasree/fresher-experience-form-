@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Experienced Application Form</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="{% url 'fresher' %}">Fresher</a>
+            <a href="{% url 'experienced' %}">Experienced</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Experienced Application Form</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.full_name.label_tag }} {{ form.full_name }}<br>
+            {{ form.email.label_tag }} {{ form.email }}<br>
+            {{ form.mobile_number.label_tag }} {{ form.mobile_number }}<br>
+            {{ form.address.label_tag }} {{ form.address }}<br>
+            {{ form.ssc_memo.label_tag }} {{ form.ssc_memo }}<br>
+            {{ form.inter_memo.label_tag }} {{ form.inter_memo }}<br>
+            {{ form.degree_memo.label_tag }} {{ form.degree_memo }}<br>
+            {{ form.aadhar_card.label_tag }} {{ form.aadhar_card }}<br>
+            {{ form.pan_card.label_tag }} {{ form.pan_card }}<br>
+            {{ form.passport_photo.label_tag }} {{ form.passport_photo }}<br>
+            {{ form.pre_offer_letter.label_tag }} {{ form.pre_offer_letter }}<br>
+            {{ form.pay_slips.label_tag }} {{ form.pay_slips }}<br>
+            {{ form.relieving_experience.label_tag }} {{ form.relieving_experience }}<br>
+            <button type="submit">Submit</button>
+        </form>
+    </main>
+</body>
+</html>

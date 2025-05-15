@@ -1,0 +1,103 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: #f2f2f2;
+}
+
+.main-container {
+  padding: 20px;
+}
+
+.login-container, .dashboard {
+  max-width: 900px;
+  margin: 40px auto;
+  background: white;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #ccc;
+}
+
+.logo-area {
+  text-align: center;
+}
+
+.logo-img {
+  height: 80px;
+}
+
+.login-form-area h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.login-form-area form input {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.login-form-area form button {
+  width: 100%;
+  padding: 12px;
+  background-color: #003366;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logout-btn {
+  color: red;
+  text-decoration: none;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.search-form input {
+  width: 60%;
+  padding: 10px;
+  margin: 20px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.search-form button {
+  padding: 10px 20px;
+  background-color: #0059b3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th, td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #003366;
+  color: white;
+}
+
+td a {
+  color: red;
+}
