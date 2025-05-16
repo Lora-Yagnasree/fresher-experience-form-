@@ -5,6 +5,14 @@
     <meta charset="UTF-8">
     <title>Fresher Application Form</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        .errorlist {
+            color: red;
+            font-size: 0.9em;
+            margin: 0 0 10px 0;
+            list-style: none;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -15,38 +23,48 @@
     </header>
     <main>
         <h2>Fresher Application Form</h2>
+        
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li style="color: red;">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
+            {{ form.non_field_errors }}
 
-            <label for="full_name">Full Name:</label>
-            <input type="text" id="full_name" name="full_name" required><br>
+            <label for="{{ form.full_name.id_for_label }}">Full Name:</label>
+            {{ form.full_name }} {{ form.full_name.errors }}
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required><br>
+            <label for="{{ form.email.id_for_label }}">Email:</label>
+            {{ form.email }} {{ form.email.errors }}
 
-            <label for="mobile_number">Mobile Number:</label>
-            <input type="text" id="mobile_number" name="mobile_number" pattern="[0-9]{10}" required><br>
+            <label for="{{ form.mobile_number.id_for_label }}">Mobile Number:</label>
+            {{ form.mobile_number }} {{ form.mobile_number.errors }}
 
-            <label for="address">Address:</label>
-            <textarea id="address" name="address" rows="3" required></textarea><br>
+            <label for="{{ form.address.id_for_label }}">Address:</label>
+            {{ form.address }} {{ form.address.errors }}
 
-            <label for="ssc_memo">SSC Memo:</label>
-            <input type="file" id="ssc_memo" name="ssc_memo" required><br>
+            <label for="{{ form.ssc_memo.id_for_label }}">SSC Memo:</label>
+            {{ form.ssc_memo }} {{ form.ssc_memo.errors }}
 
-            <label for="inter_memo">Intermediate Memo:</label>
-            <input type="file" id="inter_memo" name="inter_memo" required><br>
+            <label for="{{ form.inter_memo.id_for_label }}">Intermediate Memo:</label>
+            {{ form.inter_memo }} {{ form.inter_memo.errors }}
 
-            <label for="degree_memo">Degree Memo:</label>
-            <input type="file" id="degree_memo" name="degree_memo" required><br>
+            <label for="{{ form.degree_memo.id_for_label }}">Degree Memo:</label>
+            {{ form.degree_memo }} {{ form.degree_memo.errors }}
 
-            <label for="aadhar_card">Aadhar Card:</label>
-            <input type="file" id="aadhar_card" name="aadhar_card" required><br>
+            <label for="{{ form.aadhar_card.id_for_label }}">Aadhar Card:</label>
+            {{ form.aadhar_card }} {{ form.aadhar_card.errors }}
 
-            <label for="pan_card">PAN Card:</label>
-            <input type="file" id="pan_card" name="pan_card" required><br>
+            <label for="{{ form.pan_card.id_for_label }}">PAN Card:</label>
+            {{ form.pan_card }} {{ form.pan_card.errors }}
 
-            <label for="passport_photo">Passport Photo:</label>
-            <input type="file" id="passport_photo" name="passport_photo" required><br>
+            <label for="{{ form.passport_photo.id_for_label }}">Passport Photo:</label>
+            {{ form.passport_photo }} {{ form.passport_photo.errors }}
 
             <button type="submit">Submit</button>
         </form>
