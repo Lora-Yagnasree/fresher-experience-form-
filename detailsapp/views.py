@@ -26,8 +26,8 @@ def admin_login(request):
 @login_required
 def admin_dashboard(request):
     search_query = request.GET.get('search')
-    fresher_applicants = FresherApplicant.objects.all()
-    experienced_applicants = ExperiencedApplicant.objects.all()
+    fresher_applicants = FresherApplicant.objects.all().order_by('-submitted_at')
+    experienced_applicants = ExperiencedApplicant.objects.all().order_by('-submitted_at')
 
     if search_query:
         fresher_applicants = fresher_applicants.filter(
