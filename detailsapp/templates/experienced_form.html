@@ -2,36 +2,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Experienced Application Form</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <meta charset="UTF-8">
+  <title>Experienced Application Form</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="{% url 'fresher' %}">Fresher</a>
-            <a href="{% url 'experienced' %}">Experienced</a>
-        </nav>
-    </header>
-    <main>
-        <h2>Experienced Application Form</h2>
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.full_name.label_tag }} {{ form.full_name }}<br>
-            {{ form.email.label_tag }} {{ form.email }}<br>
-            {{ form.mobile_number.label_tag }} {{ form.mobile_number }}<br>
-            {{ form.address.label_tag }} {{ form.address }}<br>
-            {{ form.ssc_memo.label_tag }} {{ form.ssc_memo }}<br>
-            {{ form.inter_memo.label_tag }} {{ form.inter_memo }}<br>
-            {{ form.degree_memo.label_tag }} {{ form.degree_memo }}<br>
-            {{ form.aadhar_card.label_tag }} {{ form.aadhar_card }}<br>
-            {{ form.pan_card.label_tag }} {{ form.pan_card }}<br>
-            {{ form.passport_photo.label_tag }} {{ form.passport_photo }}<br>
-            {{ form.pre_offer_letter.label_tag }} {{ form.pre_offer_letter }}<br>
-            {{ form.pay_slips.label_tag }} {{ form.pay_slips }}<br>
-            {{ form.relieving_experience.label_tag }} {{ form.relieving_experience }}<br>
-            <button type="submit">Submit</button>
-        </form>
-    </main>
+  <header>
+    <nav>
+      <a href="{% url 'fresher' %}">Fresher</a>
+      <a href="{% url 'experienced' %}">Experienced</a>
+    </nav>
+  </header>
+  <main>
+    <h2>Experienced Application Form</h2>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <label for="full_name">Full Name:</label>
+      <input type="text" id="full_name" name="full_name" required><br>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required><br>
+
+      <label for="mobile_number">Mobile Number:</label>
+      <input type="text" id="mobile_number" name="mobile_number" pattern="[0-9]{10}" required><br>
+
+      <label for="address">Address:</label>
+      <textarea id="address" name="address" rows="3" required></textarea><br>
+
+      <label for="ssc_memo">SSC Memo:</label>
+      <input type="file" id="ssc_memo" name="ssc_memo" required><br>
+
+      <label for="inter_memo">Intermediate Memo:</label>
+      <input type="file" id="inter_memo" name="inter_memo" required><br>
+
+      <label for="degree_memo">Degree Memo:</label>
+      <input type="file" id="degree_memo" name="degree_memo" required><br>
+
+      <label for="aadhar_card">Aadhar Card:</label>
+      <input type="file" id="aadhar_card" name="aadhar_card" required><br>
+
+      <label for="pan_card">PAN Card:</label>
+      <input type="file" id="pan_card" name="pan_card" required><br>
+
+      <label for="passport_photo">Passport Photo:</label>
+      <input type="file" id="passport_photo" name="passport_photo" required><br>
+
+      <label for="pre_offer_letter">Pre-Offer Letter:</label>
+      <input type="file" id="pre_offer_letter" name="pre_offer_letter"><br>
+
+      <label for="pay_slips">Pay Slips:</label>
+      <input type="file" id="pay_slips" name="pay_slips"><br>
+
+      <label for="relieving_experience">Relieving/Experience Letter:</label>
+      <input type="file" id="relieving_experience" name="relieving_experience"><br>
+
+      <button type="submit">Submit</button>
+    </form>
+  </main>
 </body>
 </html>

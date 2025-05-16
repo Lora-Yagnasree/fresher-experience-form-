@@ -51,25 +51,26 @@ def delete_applicant(request, id):
 def admin_logout(request):
     logout(request)
     return redirect('admin_login')
-
 def fresher_view(request):
     if request.method == "POST":
         form = FresherForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect("fresher")
+            return redirect('submit_success')  # Redirect to success page
     else:
         form = FresherForm()
     return render(request, "fresher_form.html", {"form": form})
-
 def experienced_view(request):
     if request.method == "POST":
         form = ExperiencedForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect("experienced")
+            return redirect('submit_success')  # Redirect to success page
     else:
         form = ExperiencedForm()
     return render(request, "experienced_form.html", {"form": form})
+
+def submit_success(request):
+    return render(request, 'submit.html')
 
 # Create your views here.

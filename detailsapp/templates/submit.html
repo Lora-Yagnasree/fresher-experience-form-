@@ -1,0 +1,16 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Submission Successful</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <div class="success-message">
+    <h1>Thank you!</h1>
+    <p>Your application has been submitted successfully.</p>
+    <a href="{% url 'fresher' %}">Back to Application</a> |
+  </div>
+</body>
+</html>

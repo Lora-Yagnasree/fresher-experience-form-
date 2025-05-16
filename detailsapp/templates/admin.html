@@ -14,7 +14,7 @@
     <!-- Login Section -->
     <div class="login-container">
       <div class="logo-area">
-        <img src="{% static 'assets/Lora.png' %}" alt="Company Logo" class="logo-img" />
+        <img src="{% static 'css/assets/Lora.png' %}" alt="Company Logo" class="logo-img" />
       </div>
       <div class="login-form-area">
         <h2>Admin Login</h2>
@@ -73,50 +73,43 @@
                 <th>Photo</th>
                 <th>Pre-Offer</th>
                 <th>Pay Slips</th>
-                <th>Experience</th>
+                <th>relieving&experience</th>
                 <th>Submitted At</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-  {% for applicant in applicants %}
-  <tr>
-    <td>{{ forloop.counter }}</td>
-    <td>{{ applicant.full_name }}</td>
-    <td>{{ applicant.email }}</td>
-    <td>{{ applicant.mobile_number }}</td>
-    <td>{{ applicant.address }}</td>
-    <td><a href="{{ applicant.ssc_memo.url }}" target="_blank">View</a></td>
-    <td><a href="{{ applicant.inter_memo.url }}" target="_blank">View</a></td>
-    <td><a href="{{ applicant.degree_memo.url }}" target="_blank">View</a></td>
-    <td><a href="{{ applicant.aadhar_card.url }}" target="_blank">View</a></td>
-    <td><a href="{{ applicant.pan_card.url }}" target="_blank">View</a></td>
-    <td><a href="{{ applicant.passport_photo.url }}" target="_blank">View</a></td>
-    <td>
-      {% if applicant.pre_offer_letter %}
-        <a href="{{ applicant.pre_offer_letter.url }}" target="_blank">View</a>
-      {% endif %}
-    </td>
-    <td>
-      {% if applicant.pay_slips %}
-        <a href="{{ applicant.pay_slips.url }}" target="_blank">View</a>
-      {% endif %}
-    </td>
-    <td>
-      {% if applicant.relieving_experience %}
-        <a href="{{ applicant.relieving_experience.url }}" target="_blank">View</a>
-      {% endif %}
-    </td>
-    <td>{{ applicant.submitted_at|date:"Y-m-d H:i" }}</td>
-    <td>
-      <a href="{% url 'delete_applicant' applicant.id %}" onclick="return confirm('Are you sure?')">
-        <i class="fas fa-trash" style="color: red;"></i>
-      </a>
-    </td>
-  </tr>
-  {% endfor %}
-</tbody>
-
+              {% if applicants %}
+                {% for applicant in applicants %}
+                <tr>
+                  <td>{{ forloop.counter }}</td>
+                  <td>{{ applicant.full_name }}</td>
+                  <td>{{ applicant.email }}</td>
+                  <td>{{ applicant.mobile_number }}</td>
+                  <td>{{ applicant.address }}</td>
+                  <td><a href="{{ applicant.ssc_memo.url }}" target="_blank">View</a></td>
+                  <td><a href="{{ applicant.inter_memo.url }}" target="_blank">View</a></td>
+                  <td><a href="{{ applicant.degree_memo.url }}" target="_blank">View</a></td>
+                  <td><a href="{{ applicant.aadhar_card.url }}" target="_blank">View</a></td>
+                  <td><a href="{{ applicant.pan_card.url }}" target="_blank">View</a></td>
+                  <td><a href="{{ applicant.passport_photo.url }}" target="_blank">View</a></td>
+                  <td>{% if applicant.pre_offer_letter %}<a href="{{ applicant.pre_offer_letter.url }}" target="_blank">View</a>{% endif %}</td>
+                  <td>{% if applicant.pay_slips %}<a href="{{ applicant.pay_slips.url }}" target="_blank">View</a>{% endif %}</td>
+                  <td>{% if applicant.relieving_experience %}<a href="{{ applicant.relieving_experience.url }}" target="_blank">View</a>{% endif %}</td>
+                  <td>{{ applicant.submitted_at|date:"Y-m-d H:i" }}</td>
+                  <td>
+                    <a href="{% url 'delete_applicant' applicant.id %}" title="Delete Row">
+                      <i class="fas fa-trash-alt"></i>
+                    </a>
+                  </td>
+                </tr>
+                {% endfor %}
+              {% else %}
+              <tr>
+                <td colspan="16">No data available</td>
+              </tr>
+              {% endif %}
+            </tbody>
           </table>
         </div>
       </div>
