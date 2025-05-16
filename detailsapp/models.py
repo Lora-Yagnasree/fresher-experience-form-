@@ -5,7 +5,7 @@ def upload_path(instance, filename):
 
 class ApplicantBase(models.Model):
     full_name = models.CharField(max_length=100)
-    email = models.EmailField()
+    email = models.EmailField(unique=True)
     mobile_number = models.CharField(max_length=10)
     address = models.TextField()
 
