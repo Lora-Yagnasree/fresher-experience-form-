@@ -65,3 +65,21 @@ button {
 button:hover {
     background-color: #0059b3;
 }
+.errorlist {
+    color: #d9534f;
+    font-size: 0.9em;
+    margin: 5px 0 10px 0;
+    padding-left: 20px;
+    list-style-type: disc;
+}
+
+.messages {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 20px;
+}
+
+.messages li {
+    color: #d9534f;
+    font-weight: bold;
+}
