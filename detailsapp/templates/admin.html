@@ -6,6 +6,7 @@
   <title>Admin Panel</title>
   <link rel="stylesheet" href="{% static 'css/admin.css' %}" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  
 </head>
 <body>
   <div class="main-container">
@@ -43,10 +44,33 @@
         </div>
       </div><br>
 
-      <!-- Search Bar -->
-      <form method="GET" class="search-form">
-        <input type="text" name="search" placeholder="Search anything..." value="{{ request.GET.search }}">
+      <!-- Search & Filter Form -->
+      <form method="GET" class="search-form" style="display: flex; align-items: center; gap: 10px;">
+        <input type="text" name="search" placeholder="Search anything..." value="{{ search_query }}" />
+
+        <!-- Date Filter -->
+        <select name="date">
+          <option value="">Filter by Date</option>
+          {% for date in unique_dates %}
+            <option value="{{ date|date:'Y-m-d' }}" {% if selected_date == date|date:'Y-m-d' %}selected{% endif %}>
+              {{ date|date:"Y-m-d" }}
+            </option>
+          {% endfor %}
+        </select>
+
+        <!-- Month Filter -->
+        <select name="month">
+          <option value="">Filter by Month</option>
+          {% for month in unique_months %}
+            <option value="{{ month|date:'Y-m' }}" {% if selected_month == month|date:'Y-m' %}selected{% endif %}>
+              {{ month|date:"F Y" }}
+            </option>
+          {% endfor %}
+        </select>
+
         <button type="submit">Search</button>
+
+        
       </form>
 
       <!-- Submission Count -->
@@ -54,7 +78,7 @@
         Total Submissions: {{ applicants|length }}
       </div>
 
-      <!-- Table -->
+      <!-- Table Section -->
       <div class="table-section">
         <div class="table-container">
           <table>
@@ -73,7 +97,7 @@
                 <th>Photo</th>
                 <th>Pre-Offer</th>
                 <th>Pay Slips</th>
-                <th>relieving&experience</th>
+                <th>Relieving & Experience</th>
                 <th>Submitted At</th>
                 <th>Actions</th>
               </tr>
@@ -93,12 +117,31 @@
                   <td><a href="{{ applicant.aadhar_card.url }}" target="_blank">View</a></td>
                   <td><a href="{{ applicant.pan_card.url }}" target="_blank">View</a></td>
                   <td><a href="{{ applicant.passport_photo.url }}" target="_blank">View</a></td>
-                  <td>{% if applicant.pre_offer_letter %}<a href="{{ applicant.pre_offer_letter.url }}" target="_blank">View</a>{% endif %}</td>
-                  <td>{% if applicant.pay_slips %}<a href="{{ applicant.pay_slips.url }}" target="_blank">View</a>{% endif %}</td>
-                  <td>{% if applicant.relieving_experience %}<a href="{{ applicant.relieving_experience.url }}" target="_blank">View</a>{% endif %}</td>
+                  <td>
+                    {% if applicant.pre_offer_letter %}
+                      <a href="{{ applicant.pre_offer_letter.url }}" target="_blank">View</a>
+                    {% else %}
+                      -
+                    {% endif %}
+                  </td>
+                  <td>
+                    {% if applicant.pay_slips %}
+                      <a href="{{ applicant.pay_slips.url }}" target="_blank">View</a>
+                    {% else %}
+                      -
+                    {% endif %}
+                  </td>
+                  <td>
+                    {% if applicant.relieving_experience %}
+                      <a href="{{ applicant.relieving_experience.url }}" target="_blank">View</a>
+                    {% else %}
+                      -
+                    {% endif %}
+                  </td>
                   <td>{{ applicant.submitted_at|date:"Y-m-d H:i" }}</td>
                   <td>
-                    <a href="{% url 'delete_applicant' applicant.id %}" title="Delete Row">
+                    <a href="{% url 'delete_applicant' applicant.id %}" title="Delete Row"
+                       onclick="return confirm('Are you sure you want to delete this applicant?');">
                       <i class="fas fa-trash-alt"></i>
                     </a>
                   </td>
@@ -106,7 +149,7 @@
                 {% endfor %}
               {% else %}
               <tr>
-                <td colspan="16">No data available</td>
+                <td colspan="16" style="text-align: center;">No data available</td>
               </tr>
               {% endif %}
             </tbody>
@@ -116,6 +159,7 @@
     </div>
     {% endif %}
   </div>
+
   <script src="{% static 'js/admin.js' %}"></script>
 </body>
 </html>
